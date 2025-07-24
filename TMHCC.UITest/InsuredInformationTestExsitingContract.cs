@@ -2,35 +2,20 @@
 using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using Newtonsoft.Json;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 
 namespace TMHCC.UITest
 {
-    public class Config
-    {
-        public string Url { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Answer { get; set; }
-    }
 
-    public static class ConfigLoader
-    {
-        public static Config LoadConfig(string path)
-        {
-            using (StreamReader r = new StreamReader(path))
-            {
-                string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<Config>(json);
-            }
-        }
-    }
+    /// <summary>
+    /// Login --> Verify --> New Quote --> General Liablity-->
+    /// With Contract NUmber--> License State-->Policy NUmber
+    /// </summary>
 
     [TestClass]
-    public class ArtisanPageTests
+    public class InsuredInformationTestExsitingContract
     {
         private IWebDriver driver;
         private Config config;
