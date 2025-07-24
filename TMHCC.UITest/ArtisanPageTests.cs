@@ -107,21 +107,30 @@ namespace TMHCC.UITest
         {
             try
             {
-                // 1. Open the dropdown by clicking the visible container
-                var dropdownContainer = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                // 1. Click the dropdown to open it
+                var dropdownContainer = wait.Until(ExpectedConditions
                     .ElementToBeClickable(By.CssSelector(".choices[data-type='select-one']")));
                 dropdownContainer.Click();
 
-                // 2. Click the "CALIFORNIA" item from the rendered list
-                var californiaOption = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                    .ElementToBeClickable(By.XPath("//div[contains(@class,'choices__item') and text()='CALIFORNIA']")));
+                // 2. Wait for "CALIFORNIA" to appear in the dropdown options
+                var californiaOption = wait.Until(ExpectedConditions
+                    .ElementToBeClickable(By.XPath("//div[contains(@class,'choices__item--choice') and span[text()='CALIFORNIA']]")));
+
+                // Scroll into view (optional but helpful for some UIs)
+                ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", californiaOption);
+
+                // 3. Click "CALIFORNIA"
                 californiaOption.Click();
 
-                // 3. Confirm CALIFORNIA is now selected
-                var selectedStateElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-                    .ElementIsVisible(By.CssSelector(".choices__list--single .choices__item--selectable span")));
-                string selectedState = selectedStateElement.Text.Trim();
+                // 4. Wait for the selected item to be updated (excluding placeholder)
+                var selectedItem = wait.Until(ExpectedConditions
+                    .ElementIsVisible(By.CssSelector(".choices__list--single .choices__item:not(.choices__placeholder)")));
+
+                // 5. Read and assert the selected state
+                string selectedState = selectedItem.Text.Trim();
+                Console.WriteLine("Selected state: " + selectedState);
                 Assert.AreEqual("CALIFORNIA", selectedState.ToUpper(), "Expected selected state to be CALIFORNIA.");
+
 
                 // 4. Fill in the license number
                 var licenseInput = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TMHCC.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cefbc616954c9f51f7aefa2ee456fa1af03e82d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("TMHCC.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TMHCC.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
